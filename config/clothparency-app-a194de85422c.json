@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "clothparency-app",
+  "private_key_id": "a194de85422ca02138712331bdbcd713d3e09fd2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCFz5ZeZ9VP07Gf\nua84kRWlPdmaKawaL08HKOem1P1NQKP5OAYHt1UhGCBCwWj/XzCX1wXnuUJI5ZdA\nFOY+vLtF8y40W7F6mdiSmxVfJmyh1W9PdfOxeNQovx2XqEAyfxbDTPWLKMX3Iho2\nrxDGVzYRCzOKk5yT5W5AI9gAlNx4JIIn46zzocvt01q7wqISIowWh+tGU9cXdWPa\ndWA/jSkp2AcXFmh6iWodpXDdf5S+rVtPu0H9wOLSLjSxWAMn1nZglVNQWfqXCj7b\nWCAn5rw5JQPRElN6PR7ZURjW9yhb60axPeK5z9FCHrt2Y4eS4m4xw5Nr1a1Js60r\nqazHEfDZAgMBAAECggEAAPbn9C5+qbyCgl6X4hoenDIrzjoIauhmIwyzDb9pg3vo\nqqhSF85lG0/VlLGY8IVGwANtYBgUX5rjChPUfIWG+og4ECnMh9AR0O2z+9t2qzxy\n+NFGdEQlEFWfUJtmeg6zMu1sNChzM9avtm7w2aMhiUIpyRELDwBXePghK5DnHWkQ\nSXQNAD3u6XE7VbCzQoWIFtyCXfDKN6hg3tznNDrVBJ3Ms3iEwBCQHG+D1rcR+aMo\nOpCXpZuQhvhSqfCsqz6uMyocg9PjVWYyz/HQOwqzDlLrV6iBOtvDDmJMuyjg3sYb\njxDPcJHbnwg5C2oNG9EHgkiX462lDYBe9L0/Yj8KcQKBgQC8fsGr1dMDct7ESyJI\nfdNdQ6dAQbM+PFOs3UJOY7uBFdATXBd7QCDDmrZXUZxtNJNWg6IMxOWktoKm5Ue+\nho3WTuyVTH6Akg/BmqkuEcRG1wuUZnhxUf3bjYudF2r8KIYsb6E5QP2Tq6Vk/fxU\nyK40mxa8vd/G5k/MAdClbGnuiQKBgQC1u2A3jvlPWxsvt2YM6OXIYwxxDrQoKQ09\nu/NJm07qBRdLCjQe1qg7v+bjxPnhctymClDHGXHUV8V+nZyjyNv+7Nd0jBKq14F0\nKlPwm1rV1haip9sLfJdf8JmXaMcGYrD/VhLNcM1CdQabj7jzlvvBG5lNfRl5pkst\nLc1Pb4/b0QKBgDP/h6++gcJ+ysM9ssxqoYcl5ZqNRUQS4kZalzMGwi/+83KTwgqH\nC0LKiCiYY92gVlDUaTy6iFsi2fHuaBdACRqolQ0ul+sh3+TZpHgIAKxGIHSku+8O\n3kfVyUDht+qtxy208bXYnttAy5SLmDNPVPdAHUqd2oCFAlhV29f2i1Z5AoGAVNVY\nT/ck+F9eLIMfV01s3oMmLqyfetPXA4d2RVkDmIix2+yycebgd6vYW2D7CLv2tmfA\nV4DQO0CRx85Jbcd4suLanOQ6XpflLVYJAxtyZrnerSVQQmdxvm5xNFXL+nYdi8Qh\nWNecabZ5VCreOo+zi+yXPq30M25mT3u/CKLac9ECgYByZyet+e3atq7DCWCgLc8k\nrLGw9uGB2EKR4j3Ug6jT5ln7MRVSXNL6wDdi2CN/9/oQsKcX9sohjQznH3BlBDAk\neS2QiOWN8HKilpu3EZAA+rqSc6F38K0hAjGMxc5J5Y1TAV+AauHeXFYjakK8izQd\n7TR6JGEa696/0GroS1rYIg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "clothparency@clothparency-app.iam.gserviceaccount.com",
+  "client_id": "108746439680593741111",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/clothparency%40clothparency-app.iam.gserviceaccount.com"
+}

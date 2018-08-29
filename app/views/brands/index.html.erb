@@ -1,0 +1,227 @@
+<% if @brands.first.nil? %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="item-results-container">
+          <h2>No information on this brand.</h2>
+          <p>Your request will be treated as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-call-to-action">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="row" id="call-to-action-box">
+          <div class="col-xs-6">
+            <%= link_to search_path, class: "btn btn-primary btn-full-width" do %>
+            <i class="fa fa-arrow-left"></i> Back
+            <% end %>
+          </div>
+          <div class="col-xs-6">
+            <%= link_to new_review_path, class: "btn btn-full-width btn-primary btn-margin-top btn-grey" do %>
+              <i class="fa fa-edit"></i> Feedback
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <% @brands.each do |brand| %>
+    <div class="top-call-to-action">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <div class="row" id="call-to-action-box">
+            <form action="/users" method="post" >
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <label for="email" class="discover">Discover similar brands with better commitments</label>
+              <div class="col-xs-9">
+                <input name="email" type="text" placeholder="email" id="email">
+              </div>
+              <div class="col-xs-3">
+                <input type="submit" class="btn btn-primary btn-discover" value="Go!"></input>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <div class="item-results-container">
+            <h2>Information about <%= brand.name %></h2>
+            <div class="fb-share-button" data-href="https://app.clothparency.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+
+            <div class="detail">
+              <% scope_environment_themes = Theme.where(scope: "Environnement").select do |theme| %>
+                <% theme.brand_reviews.where(brand: brand) != [] %>
+              <% end %>
+
+              <% if scope_environment_themes != [] %>
+                <div class="scope-title">
+                  <%= image_tag "world@4x.png", height: 30 %>
+                  <h2>Environment</h2>
+                </div>
+
+                <div class="impact-materiaux">
+
+                  <% Theme.where(scope: "Environnement").each do |theme| %>
+                    <% selected_brand_reviews = theme.brand_reviews.where(brand: brand) %>
+
+                    <% if selected_brand_reviews != [] %>
+                      <div class="theme-card" id="<%= theme.name.downcase %>">
+                        <div class="clickable impact-materiaux-criteria">
+                          <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction.capitalize %></strong></p>
+                          <div class="criteria_color <%= brand.theme_color(theme) %>"></div>
+                          <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                        </div>
+                        <p class="concise-comment">
+                          <% if brand.theme_color(theme) == "green_background" %>
+                            <%= theme.english_greencomment %>
+                          <% elsif brand.theme_color(theme) == "red_background" %>
+                            <%= theme.english_redcomment %>
+                          <% else %>
+                            <%= theme.english_orangecomment %>
+                          <% end %>
+                        </p>
+                        <ul class="sources-list inactive">
+                          <% selected_brand_reviews.each do |brand_review| %>
+                            <li class="source">
+                              <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                              <% if @lorem_ipsum %>
+                                <br>
+                                <p id="content"><%= @lorem_ipsum %></p>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% scope_human_themes = Theme.where(scope: "Homme").select do |theme| %>
+                <% theme.brand_reviews.where(brand: brand) != [] %>
+              <% end %>
+
+              <% if scope_human_themes != [] %>
+                <div class="scope-title">
+                  <%= image_tag "multiple-11@4x.png", height: 30 %>
+                  <h2>Hommes</h2>
+                </div>
+                <div class="impact-materiaux">
+                  <% Theme.where(scope: "Homme").each do |theme| %>
+                    <% selected_brand_reviews = theme.brand_reviews.where(brand: brand) %>
+
+                    <% if selected_brand_reviews != [] %>
+                      <div class="theme-card" id="<%= theme.name.downcase %>">
+                        <div class="clickable impact-materiaux-criteria">
+                          <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction.capitalize %></strong></p>
+                          <div class="criteria_color <%= brand.theme_color(theme) %>"></div>
+                          <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                        </div>
+                        <p class="concise-comment">
+                          <% if brand.theme_color(theme) == "green_background" %>
+                            <%= theme.english_greencomment %>
+                          <% elsif brand.theme_color(theme) == "red_background" %>
+                            <%= theme.english_redcomment %>
+                          <% else %>
+                            <%= theme.english_orangecomment %>
+                          <% end %>
+                        </p>
+                        <ul class="sources-list inactive">
+                          <% selected_brand_reviews.each do |brand_review| %>
+                            <li class="source">
+                              <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                              <% if @lorem_ipsum %>
+                                <br>
+                                <p id="content"><%= @lorem_ipsum %></p>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% scope_animal_themes = Theme.where(scope: "Animaux").select do |theme| %>
+                <% theme.brand_reviews.where(brand: brand) != [] %>
+              <% end %>
+
+              <% if scope_animal_themes != [] %>
+                <div class="impact-materiaux">
+                  <div class="scope-title">
+                    <%= image_tag "turtle@4x.png", height: 30 %>
+                    <h2>Animaux</h2>
+                  </div>
+                  <% Theme.where(scope: "Animaux").each do |theme| %>
+                    <% selected_brand_reviews = theme.brand_reviews.where(brand: brand) %>
+
+                    <% if selected_brand_reviews != [] %>
+                      <div class="theme-card" id="<%= theme.name.downcase %>">
+                        <div class="clickable impact-materiaux-criteria">
+                          <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction.capitalize %></strong></p>
+                          <div class="criteria_color <%= brand.theme_color(theme) %>"></div>
+                          <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                        </div>
+                        <p class="concise-comment">
+                          <% if brand.theme_color(theme) == "green_background" %>
+                            <%= theme.english_greencomment %>
+                          <% elsif brand.theme_color(theme) == "red_background" %>
+                            <%= theme.english_redcomment %>
+                          <% else %>
+                            <%= theme.english_orangecomment %>
+                          <% end %>
+                        </p>
+                        <ul class="sources-list inactive">
+                          <% selected_brand_reviews.each do |brand_review| %>
+                            <li class="source">
+                              <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                              <% if @lorem_ipsum %>
+                                <br>
+                                <p id="content"><%= @lorem_ipsum %></p>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+
+            <p id="sources_analyse"><em>This analysis is based on <%= brand.brand_reviews.count %> information sources.</em></p>
+
+            </div>
+          </div>
+          <script src="components/sources.js"></script>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-call-to-action">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <div class="row" id="call-to-action-box">
+            <div class="col-xs-6">
+              <%= link_to search_path, class: "btn btn-primary btn-full-width" do %>
+              <i class="fa fa-arrow-left"></i> Back
+              <% end %>
+            </div>
+            <div class="col-xs-6">
+              <%= link_to new_review_path, class: "btn btn-full-width btn-primary btn-margin-top btn-grey" do %>
+                <i class="fa fa-edit"></i> Your feedbacks
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

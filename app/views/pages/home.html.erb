@@ -1,0 +1,25 @@
+<% content_for :navbar do %>
+      <%= render 'navbar_variation_one' %>
+ <% end %>
+
+<div class="container fixed-page-size">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 center">
+      <h2 class="font-size-home">
+        Make informed decisions :
+        <br>
+        Buy ethically !
+      </h2>
+      <p class="present-home">Clothparency enables you to change the way you shop, knowing what your really buy.</p>
+
+      <%= image_tag "tshirt-question.png", height: 200, class: "big-icon home-icon" %>
+      <%= link_to new_item_path, class: "btn btn-primary btn-full-width fixed-bottom-xs fixed-bottom-sm" do %>
+        <i class="fa fa-search dropdown-toggle" data-toggle="dropdown"></i> Specific item score
+      <% end %>
+
+      <%= link_to search_path, class: "btn btn-primary btn-full-width fixed-bottom-xs fixed-bottom-sm btn-margin" do %>
+        <i class="fa fa-search dropdown-toggle" data-toggle="dropdown"></i> Brand information
+      <% end %>
+    </div>
+  </div>
+</div>

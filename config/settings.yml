@@ -1,0 +1,9 @@
+default: &default
+  project_id: [clothparency_app]
+  gcs_bucket: [clothparency_images]
+
+development:
+  <<: *default
+
+production:
+  <<: *default

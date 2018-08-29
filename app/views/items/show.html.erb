@@ -1,0 +1,331 @@
+<div class="top-call-to-action">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="row" id="call-to-action-box">
+        <form action="/users" method="post" >
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <%= hidden_field_tag :category_id, @item.category.id %>
+          <label for="email" class="discover">Discover the top <%= @item.category.traduction %></label>
+          <div class="col-xs-9">
+            <input name="email" type="text" placeholder="email" id="email">
+          </div>
+          <div class="col-xs-3">
+            <input type="submit" class="btn btn-primary btn-discover" value="Go!"></input>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="item-results-container">
+        <h2><%= @item.category.traduction %> by <%= @item.brand.name %></h2>
+
+        <p>
+          <% @item.assemblies.each do |assembly| %>
+            <%= assembly.percent.round(0) %>% <%= assembly.material.name %>
+            <% if assembly.material.recycled %>
+              recycled
+            <% end %>
+          <% end %>
+        </p>
+        <div class="global-mark">
+          <% if @item.global_color == "green_background" %>
+            <%= image_tag "in-love-smiley.png", height: 200 %>
+          <% elsif @item.global_color == "red_background" %>
+            <%= image_tag "crying-smiley.png", height: 200 %>
+          <% else %>
+            <%= image_tag "question-smiley.png", height: 200 %>
+          <% end %>
+        </div>
+
+        <div class="fb-share-button" data-href="https://app.clothparency.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+
+        <div class="detail">
+          <div class="scope-title">
+            <%= image_tag "world@4x.png", height: 30 %>
+            <h2>Environment</h2>
+          </div>
+
+          <div class="impact-materiaux">
+            <div class="theme-card" id="impactcarbone">
+              <div class="clickable impact-materiaux-criteria">
+                <p class="theme-title"><strong><i class="fa fa-tree"></i> Carbon impact</strong></p>
+                <div class="criteria_color <%= @item.carbon_color %>"></div>
+                <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+              </div>
+              <p class="concise-comment">
+                <% if @item.carbon_color == "green_background" %>
+                  Low carbon impact
+                <% elsif @item.carbon_color == "red_background" %>
+                  Intensive carbon impact
+                <% else %>
+                  Average carbon impact
+                <% end %>
+              </p>
+              <ul class="sources-list inactive">
+                <li class="source">
+                  <a href="http://www.ademe.fr/">ADEME</a>
+                  <br>
+                  <p id="content">
+                    <%= @lorem_ipsum %>
+                  </p>
+                </li>
+                <% if @item.materials_list.include?("viscose") || @item.materials_list.include?("lyocell") %>
+                  <li class="source">
+                    <a href="http://www.ademe.fr/">ADEME</a>
+                    <br>
+                    <p id="content">
+                      <%= Material.where(name: "viscose").first.comment %>
+                    </p>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="theme-card" id="eutrophisation">
+              <div class="clickable impact-materiaux-criteria">
+                <p class="theme-title"><strong><i class="fa fa-tint"></i> Water pollution</strong></p>
+                <div class="criteria_color <%= @item.eutrophisation_color %>"></div>
+                <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+              </div>
+              <p class="concise-comment">
+                <% if @item.eutrophisation_color == "green_background" %>
+                  Little pollution
+                <% elsif @item.eutrophisation_color == "red_background" %>
+                  Intense pollution
+                <% else %>
+                  Average pollution
+                <% end %>
+              </p>
+              <ul class="sources-list inactive">
+                <li class="source">
+                  <a href="http://www.ademe.fr/">ADEME</a>
+                  <br>
+                  <p id="content">
+                    <%= @lorem_ipsum %>
+                  </p>
+                </li>
+                <li class="source">
+                  <a href="http://www.ademe.fr/">ADEME</a>
+                  <br>
+                  <p id="content">
+                    <%= @lorem_ipsum %>
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <% Theme.where(scope: "Environnement").each do |theme| %>
+              <% selected_brand_reviews = theme.brand_reviews.where(brand: @item.brand) %>
+
+              <% if selected_brand_reviews != [] %>
+                <div class="theme-card" id="<%= theme.name.downcase %>">
+                  <div class="clickable impact-materiaux-criteria">
+                    <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction %></strong></p>
+                    <div class="criteria_color <%= @item.theme_color(theme) %>"></div>
+                    <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                  </div>
+                  <p class="concise-comment">
+                    <% if @item.theme_color(theme) == "green_background" %>
+                      <%= theme.english_greencomment %>
+                    <% elsif @item.theme_color(theme) == "red_background" %>
+                      <%= theme.english_redcomment %>
+                    <% else %>
+                      <%= theme.english_orangecomment %>
+                    <% end %>
+                  </p>
+                  <ul class="sources-list inactive">
+                    <% selected_brand_reviews.each do |brand_review| %>
+                      <li class="source">
+                        <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                        <% if @lorem_ipsum %>
+                          <br>
+                          <p id="content"><%= @lorem_ipsum %></p>
+                        <% end %>
+                      </li>
+                    <% end %>
+                    <% if @item.label && @item.label != "" && @item.label != "autre" %>
+                      <% label_source = Source.where(name: @item.label).first %>
+                      <% if label_source.theme == theme %>
+                        <li class="source">
+                          <a href=<%= label_source.url %>><%= label_source.name %></a>
+                          <br>
+                          <p id="content"><%= label_source.description %></p>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              <% elsif @item.label && @item.label != "" && @item.label != "autre" %>
+                <% label_source = Source.where(name: @item.label).first %>
+                <% if label_source.theme == theme %>
+                  <div class="theme-card" id="<%= theme.name.downcase %>">
+                    <div class="clickable impact-materiaux-criteria">
+                      <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction %></strong></p>
+                      <div class="criteria_color <%= @item.theme_color(theme) %>"></div>
+                      <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                    </div>
+                    <p class="concise-comment">
+                      <% if @item.theme_color(theme) == "green_background" %>
+                        <%= theme.english_greencomment %>
+                      <% elsif @item.theme_color(theme) == "red_background" %>
+                        <%= theme.english_redcomment %>
+                      <% else %>
+                        <%= theme.english_orangecomment %>
+                      <% end %>
+                    </p>
+                    <ul class="sources-list inactive">
+                      <li class="source">
+                        <a href=<%= label_source.url %>><%= label_source.name %></a>
+                        <br>
+                        <p id="content"><%= label_source.description %></p>
+                      </li>
+                    </ul>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <% scope_human_themes = Theme.where(scope: "Homme").select do |theme| %>
+            <% theme.brand_reviews.where(brand: @item.brand) != [] %>
+          <% end %>
+
+          <% if scope_human_themes != [] %>
+            <div class="scope-title">
+              <%= image_tag "multiple-11@4x.png", height: 30 %>
+              <h2>Humans</h2>
+            </div>
+            <div class="impact-materiaux">
+              <% Theme.where(scope: "Homme").each do |theme| %>
+                <% selected_brand_reviews = theme.brand_reviews.where(brand: @item.brand) %>
+
+                <% if selected_brand_reviews != [] %>
+                  <div class="theme-card" id="<%= theme.name.downcase %>">
+                    <div class="clickable impact-materiaux-criteria">
+                      <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction %></strong></p>
+                      <div class="criteria_color <%= @item.theme_color(theme) %>"></div>
+                      <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                    </div>
+                    <p class="concise-comment">
+                      <% if @item.theme_color(theme) == "green_background" %>
+                        <%= theme.english_greencomment %>
+                      <% elsif @item.theme_color(theme) == "red_background" %>
+                        <%= theme.english_redcomment %>
+                      <% else %>
+                        <%= theme.english_orangecomment %>
+                      <% end %>
+                    </p>
+                    <ul class="sources-list inactive">
+                      <% selected_brand_reviews.each do |brand_review| %>
+                        <li class="source">
+                          <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                          <% if @lorem_ipsum %>
+                            <br>
+                            <p id="content"><%= @lorem_ipsum %></p>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% scope_animal_themes = Theme.where(scope: "Animaux").select do |theme| %>
+            <% theme.brand_reviews.where(brand: @item.brand) != [] %>
+          <% end %>
+
+          <div class="scope-title">
+            <%= image_tag "turtle@4x.png", height: 30 %>
+            <h2>Animals</h2>
+          </div>
+          <div class="impact-materiaux">
+            <% Theme.where(scope: "Animaux").each do |theme| %>
+              <% selected_brand_reviews = theme.brand_reviews.where(brand: @item.brand) %>
+
+              <div class="theme-card" id="<%= theme.name.downcase %>">
+                <div class="clickable impact-materiaux-criteria">
+                  <p class="theme-title"><strong><i class="fa <%= theme.icon %>"></i> <%= theme.traduction %></strong></p>
+                  <% if selected_brand_reviews != [] %>
+                    <div class="criteria_color <%= @item.theme_color(theme) %>"></div>
+                  <% else %>
+                    <div class="criteria_color"></div>
+                  <% end %>
+                  <p class="arrow-container"><i class="fa fa-chevron-down"></i><i class="fa fa-chevron-up inactive"></i></p>
+                </div>
+                <% if selected_brand_reviews != [] %>
+                  <p class="concise-comment">
+                    <% if @item.theme_color(theme) == "green_background" %>
+                      <%= theme.english_greencomment %>
+                    <% elsif @item.theme_color(theme) == "red_background" %>
+                      <%= theme.english_redcomment %>
+                    <% else %>
+                      <%= theme.english_orangecomment %>
+                    <% end %>
+                  </p>
+                <% elsif @item.materials_list.include?("soie") || @item.materials_list.include?("laine") || (@item.animal_materials_normal != []) %>
+                  <p class="concise-comment">Material of animal origin</p>
+                <% else %>
+                  <p class="concise-comment">No material of animal origin</p>
+                <% end %>
+                <ul class="sources-list inactive">
+                  <% if selected_brand_reviews != [] %>
+                    <% selected_brand_reviews.each do |brand_review| %>
+                      <li class="source">
+                        <a href=<%= brand_review.source.url %>><%= brand_review.source.name %></a>
+                        <% if @lorem_ipsum %>
+                          <br>
+                          <p id="content"><%= @lorem_ipsum %></p>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  <% end %>
+
+                  <li class="source">
+                    <a href="http://www.ademe.fr/">ADEME</a>
+                    <br>
+                    <p id="content">
+                      <%= @lorem_ipsum %>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+
+          <p id="sources_analyse">
+            <a href="http://www.clothparency.com/la-methodo">
+              <em>This analysis is based on <%= @item.count_sources %> information sources.</em>
+            </a>
+          </p>
+
+        </div>
+      </div>
+      <script src="components/sources.js"></script>
+    </div>
+  </div>
+</div>
+<div class="bottom-call-to-action">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="row" id="call-to-action-box">
+        <div class="col-xs-6">
+          <%= link_to new_item_path, class: "btn btn-primary btn-full-width" do %>
+          <i class="fa fa-arrow-left"></i> Back
+          <% end %>
+        </div>
+        <div class="col-xs-6">
+          <%= link_to new_review_path, class: "btn btn-full-width btn-primary btn-margin-top btn-grey" do %>
+            <i class="fa fa-edit"></i> Your reviews
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="form-item">
+        <h1 class="page-title">Donne-nous ton retour sur cette solution</h1>
+        <%= simple_form_for @review do |f| %>
+          <%= f.input :content, label: "Commentaire", placeholder: "Que penses-tu de cette solution : \nQu'est-ce qui te plait / Qu'est-ce qui te déplait ? \nY-a-t'il des informations que tu n'as pas pu renseigner ? (exemple: label manquant)? \n\nTon retour nous permettra de construire notre solution finale.", :input_html => {:rows => 10} %>
+          <%= f.input :email, label: false, placeholder: "email" %>
+          <%= f.submit "J'ai tout dit !", class: "btn btn-primary btn-submit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "clothparency_app",
+  "private": true,
+  "dependencies": {
+    "@google-cloud/storage": "^1.7.0",
+    "@rails/webpacker": "3.5",
+    "bootstrap": "3",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

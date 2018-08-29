@@ -1,0 +1,37 @@
+<% if content_for?(:navbar) %>
+    <%= yield(:navbar) %>
+<% else %>
+  <div class="navbar-wagon">
+    <!-- Logo -->
+    <%= link_to root_path, class: "navbar-wagon-brand" do %>
+      <%= image_tag "logo.png", height: 50 %>
+      <p class="clothparency-nav">CLOTHPARENCY</p>
+    <% end %>
+
+    <!-- Dropdown list appearing on mobile only -->
+  <!--   <div class="navbar-wagon-item hidden-md hidden-lg">
+      <div class="dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" ></i></a>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li><a href="/items/new">Evaluer un vêtement</a></li>
+          <li><a href="/reviews/new">Donner son avis!</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <ul id="menu" class="navbar-wagon-item hidden-md hidden-lg">
+      <li><a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" ></i></a>
+        <ul>
+        <li><a href="/items/new">Evaluer un vêtement</a></li>
+        <li><a href="/reviews/new">Donner son avis!</a></li>
+        </ul>
+      </li>
+    </ul> -->
+
+    <div class="navbar-wagon-right hidden-xs hidden-sm">
+        <a class="navbar-wagon-item navbar-wagon-link" id="btn-rounded" href="/reviews/new">
+          <i class="fa fa-edit"></i> Donne ton avis
+        </a>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,215 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="form-item">
+
+        <h1 class="page-title">Discover the score of your garnment</h1>
+        <%= simple_form_for @item do |f| %>
+          <% if @item.errors.any? %>
+            <div class="errors-container">
+              <ul>
+                <% @item.errors.full_messages.each do |message| %>
+                  <li><em><%= message %></em></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= f.association :category, required: true, prompt: "Type of clothing *", label: false, collection: Category.order(:traduction), label_method: :traduction, value_method: :id %>
+
+          <div id="brand-names"><p><%= brand_names = Brand.all.map { | brand | brand.name } %></p></div>
+          <div class="form-group autocomplete">
+            <%= f.input :brand, label: false, id: "brand", class: "value-input form-control required form-bottom-border", placeholder: "Brand *", name: "brand", label_method: :brand_name, value_method: :id %>
+          </div>
+
+          <p class="small-font form-comment">
+            Look at the components on the label.
+
+            Select "<i class="fas fa-recycle"></i>" if the component is recycled.</p>
+          <div class="form-group">
+            <div id="addable">
+              <div class="assembly-div">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly1[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly1[material_name]" id="item_material_names" placeholder= "component 1" required="true">
+                    <option value="" selected>component 1</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly1[recycled?]" id="item_assembly1_recycled">
+                  <label for="item_assembly1_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="addable1">
+              <div id="add_assembly1">
+                <a href="#" class="btn add-input"><i class="fas fa-plus-circle"></i> Add a component</a>
+              </div>
+              <div class="assembly-div-addable inactive">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly2[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly2[material_name]" id="item_material_names" placeholder= "component 2" required="true">
+                    <option value="" selected>component 2</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly2[recycled?]" id="item_assembly2_recycled">
+                  <label for="item_assembly2_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="addable2" class="inactive">
+              <div id="add_assembly2">
+                <a href="#" class="btn add-input"><i class="fas fa-plus-circle"></i> Add a component</a>
+              </div>
+              <div class="assembly-div-addable inactive">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly3[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly3[material_name]" id="item_material_names" placeholder= "component 3" required="true">
+                    <option value="" selected>component 3</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly3[recycled?]" id="item_assembly3_recycled">
+                  <label for="item_assembly1_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="addable3" class="inactive">
+              <div id="add_assembly3">
+                <a href="#" class="btn add-input"><i class="fas fa-plus-circle"></i> Add a component</a>
+              </div>
+              <div class="assembly-div-addable inactive">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly4[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly4[material_name]" id="item_material_names" placeholder= "component 4" required="true">
+                    <option value="" selected>component 4</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly4[recycled?]" id="item_assembly4_recycled">
+                  <label for="item_assembly4_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="addable4" class="inactive">
+              <div id="add_assembly4">
+                <a href="#" class="btn add-input"><i class="fas fa-plus-circle"></i> Add a component</a>
+              </div>
+              <div class="assembly-div-addable inactive">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly5[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly5[material_name]" id="item_material_names" placeholder= "component 5" required="true">
+                    <option value="" selected>component 5</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly5[recycled?]" id="item_assembly5_recycled">
+                  <label for="item_assembly5_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="addable5" class="inactive">
+              <div id="add_assembly5">
+                <a href="#" class="btn add-input"><i class="fas fa-plus-circle"></i> Add a component</a>
+              </div>
+              <div class="assembly-div-addable inactive">
+                <div class="nopaddingright percent-div">
+                  <div class="percent-symbol">
+                    <p>%</p>
+                  </div>
+                  <input class="value-input form-control numeric integer required little-pading text-left " type="number" step="1" name="assembly6[percent]" id="item_material_ids" required="true">
+                </div>
+
+                <div class="material-div">
+                  <select class="select-input form-control select required" name="assembly6[material_name]" id="item_material_names" placeholder= "component 6" required="true">
+                    <option value="" selected>component 6</option>
+                    <% Material.where(recycled: false).each do |material| %>
+                      <option value="<%= material.name %>"><%= material.traduction %></option>
+                    <% end %>
+                  </select>
+                </div>
+
+                <div class="nopaddingleft recycled-div">
+                  <input type="checkbox" class="hidden" value="true" name="assembly6[recycled?]" id="item_assembly6_recycled">
+                  <label for="item_assembly6_recycled" class="recycled-choice form-bottom-border">
+                    <i class="fas fa-recycle"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <%= f.input :label, label: false, collection: Item::LABELS, prompt: "Certifications" %>
+          <%= f.submit "Go !", class: "btn-submit btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<!-- Expect mobile -->
+<div class="navbar-wagon hidden-xs hidden-sm">
+  <!-- Logo -->
+  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+    <%= image_tag "logo.png", height: 50 %>
+    <p class="clothparency-nav">CLOTHPARENCY</p>
+  <% end %>
+
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
+      <a class="navbar-wagon-item navbar-wagon-link" id="btn-rounded" href="/reviews/new">
+        <i class="fa fa-edit"></i> Give your feedbacks
+      </a>
+  </div>
+</div>
+
+<!-- Mobile only -->
+<%= link_to root_path, class: "navbar-wagon-brand hidden-md hidden-lg" do %>
+  <i class="fa fa-chevron-left chevron-left"></i>
+<% end %>
+<div class="navbar-wagon hidden-md hidden-lg">
+  <!-- Back -->
+  <!-- Logo -->
+  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+    <%= image_tag "logo.png", height: 50 %>
+    <p class="clothparency-nav">CLOTHPARENCY</p>
+  <% end %>
+
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
+      <a class="navbar-wagon-item navbar-wagon-link" id="btn-rounded" href="/reviews/new">
+        <i class="fa fa-edit"></i> Give your feedbacks
+      </a>
+  </div>
+</div>

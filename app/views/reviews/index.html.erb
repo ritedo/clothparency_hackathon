@@ -1,0 +1,8 @@
+<h1>Les retours</h1>
+<ul>
+  <% @reviews.order("created_at DESC").each do |review| %>
+    <li>
+      <strong>id:</strong> <%= review.id %>, <strong>date:</strong> <%= review.created_at %>, <strong>contenu:</strong> <%= review.content %>, <strong>mail:</strong> <%= review.email %>
+    </li>
+  <% end %>
+</ul>

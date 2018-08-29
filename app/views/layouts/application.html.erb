@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M2LBXS2');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115935822-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-115935822-2');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Clothparency</title>
+    <%= favicon_link_tag %>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+
+    <!-- To support old sizes -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://app.clothparency.com/assets/logo-fond-blanc-57px.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://app.clothparency.com/assets/logo-fond-blanc-72px.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://app.clothparency.com/assets/logo-fond-blanc-114px.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://app.clothparency.com/assets/logo-fond-blanc-144px.png">
+
+    <!-- To support new sizes -->
+    <link rel=”apple-touch-icon” sizes=”60×60″ href=”http://app.clothparency.com/assets/logo-fond-blanc-60px.png”>
+    <link rel=”apple-touch-icon” sizes=”76×76″ href=”http://app.clothparency.com/assets/logo-fond-blanc-76px.png”>
+    <link rel=”apple-touch-icon” sizes=”120×120″ href=”http://app.clothparency.com/assets/logo-fond-blanc-120px.png”>
+    <link rel=”apple-touch-icon” sizes=”152×152″ href=”http://app.clothparency.com/assets/logo-fond-blanc-152px.png”>
+    <link rel=”apple-touch-icon” sizes=”180×180″ href=”http://app.clothparency.com/assets/logo-fond-blanc-180px.png”>
+
+    <!-- To support Android -->
+    <link rel=”icon” sizes=”192×192″ href=”http://app.clothparency.com/assets/logo-fond-blanc-192px.png”>
+    <link rel=”icon” sizes=”128×128″ href=”http://app.clothparency.com/assets/logo-fond-blanc-128px.png”>
+
+    <meta property="og:url"           content="http://app.clothparency.com" />
+    <meta property="og:type"          content="article" />
+    <meta property="og:title"         content="Découvrez la performance sociale et environnementale de vos vêtements sur Clothparency" />
+    <meta property="og:description"   content="La première solution de Clothparency est disponible ! Pour ceux qui souhaitent choisir leurs vêtements consciencieusement" />
+    <meta property="og:image"         content="http://app.clothparency.com/assets/image_solution.jpg" />
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0&appId=1692401884161573&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2LBXS2"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <%= yield %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+  </body>
+</html>
